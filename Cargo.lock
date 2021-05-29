@@ -11,4 +11,11 @@ name = "nlp100-rust"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "whiteread",
 ]
+
+[[package]]
+name = "whiteread"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8bc25de0a968755322a6b517a7257df7ec3216ed7907b8fc064906542f9714b3"
