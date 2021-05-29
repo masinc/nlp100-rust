@@ -1,19 +1,13 @@
-use crate::answer::Answer;
+use crate::problem::Problem;
 
 struct Problem00 {}
 
-impl Answer for Problem00 {
-    fn answer(
-        reader: &mut impl std::io::Read,
-        writer: &mut impl std::io::Write,
-    ) -> anyhow::Result<()> {
-        let mut str = String::new();
-        reader.read_to_string(&mut str)?;
+impl Problem for Problem00 {
+    type Args = String;
+    type Result = String;
 
-        let str: String = str.chars().rev().collect();
-        write!(writer, "{}", str)?;
-
-        Ok(())
+    fn answer(args: Self::Args) -> anyhow::Result<Self::Result> {
+        Ok(args.chars().rev().collect())
     }
 }
 
@@ -22,11 +16,9 @@ mod tests {
     use super::*;
     #[test]
     fn test() -> anyhow::Result<()> {
-        let mut reader = "stressed".as_bytes();
-        let mut writer = vec![];
-        Problem00::answer(&mut reader, &mut writer)?;
+        let arg = "stressed".into();
 
-        assert_eq!("desserts", String::from_utf8(writer)?);
+        assert_eq!("desserts", Problem00::answer(arg)?);
         Ok(())
     }
 }

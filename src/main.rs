@@ -1,4 +1,4 @@
-pub mod answer;
+pub mod problem;
 
 mod ch01;
 

@@ -1,24 +1,21 @@
-use crate::answer::Answer;
+use crate::problem::Problem;
 
 struct Problem01;
 
-impl Answer for Problem01 {
-    fn answer(
-        reader: &mut impl std::io::Read,
-        writer: &mut impl std::io::Write,
-    ) -> anyhow::Result<()> {
-        let mut str = String::new();
-        reader.read_to_string(&mut str)?;
+impl Problem for Problem01 {
+    type Args = String;
 
-        let str: String = str
+    type Result = String;
+
+    fn answer(args: Self::Args) -> anyhow::Result<Self::Result> {
+        let str: String = args
             .chars()
             .enumerate()
             .filter(|(index, _)| index % 2 == 1)
             .map(|(_, chr)| chr)
             .collect();
 
-        write!(writer, "{}", str)?;
-        Ok(())
+        Ok(str)
     }
 }
 
@@ -28,13 +25,8 @@ mod tests {
 
     #[test]
     fn test() -> anyhow::Result<()> {
-        let mut reader = "パタトクカシーー".as_bytes();
-        let mut writer = vec![];
-
-        Problem01::answer(&mut reader, &mut writer)?;
-
-        let result = String::from_utf8(writer)?;
-        assert_eq!("タクシー", result);
+        let arg = "パタトクカシーー".into();
+        assert_eq!("タクシー", Problem01::answer(arg)?);
 
         Ok(())
     }
