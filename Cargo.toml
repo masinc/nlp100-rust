@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 anyhow = "1.0.40"
 thiserror = "1.0.25"
+maplit = "1.0.2"
