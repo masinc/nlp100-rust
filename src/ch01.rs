@@ -5,3 +5,4 @@ mod problem03;
 mod problem04;
 mod problem05;
 mod problem06;
+mod problem07;
